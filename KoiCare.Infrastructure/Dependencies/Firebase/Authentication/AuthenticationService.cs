@@ -1,7 +1,5 @@
 ﻿using FirebaseAdmin.Auth;
 using KoiCare.Application.Abtractions.Authentication;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace KoiCare.Infrastructure.Dependencies.Firebase.Authentication
 {
