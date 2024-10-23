@@ -32,7 +32,6 @@ namespace KoiCare.Application.Features.Category
             public override async Task<CommandResult<Result>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var category = await cateRepos.Queryable()
-                    .Include(x => x.Products)
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
                 if (category == null)

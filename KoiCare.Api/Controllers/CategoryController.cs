@@ -10,7 +10,7 @@ namespace KoiCare.Api.Controllers
     public class CategoryController(IMediator mediator) : BaseController
     {
         [HttpGet("get-all")]
-        public async Task<ActionResult<GetAllCategory.Result>> GetAllBlogs([FromQuery] GetAllCategory.Query query)
+        public async Task<ActionResult<GetAllCategory.Result>> GetAllCategorys([FromQuery] GetAllCategory.Query query)
         {
             if (!ModelState.IsValid)
             {
