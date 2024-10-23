@@ -36,7 +36,7 @@ namespace KoiCare.Application.Features.Category
 
                 if (category == null)
                 {
-                    return CommandResult<Result>.Fail("Category does not exist");
+                    return CommandResult<Result>.Fail("Category không tồn tại");
                 }
 
                 var result = new Result
