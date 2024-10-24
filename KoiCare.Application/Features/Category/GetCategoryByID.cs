@@ -2,7 +2,6 @@
 using KoiCare.Application.Abtractions.Localization;
 using KoiCare.Application.Abtractions.LoggedUser;
 using KoiCare.Application.Commons;
-using KoiCare.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -36,7 +35,7 @@ namespace KoiCare.Application.Features.Category
 
                 if (category == null)
                 {
-                    return CommandResult<Result>.Fail("Category không tồn tại");
+                    return CommandResult<Result>.Fail("Category does not exist");
                 }
 
                 var result = new Result
