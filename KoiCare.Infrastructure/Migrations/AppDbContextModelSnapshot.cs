@@ -194,9 +194,6 @@ namespace KoiCare.Infrastructure.Migrations
                     b.Property<decimal?>("Breed")
                         .HasColumnType("numeric");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("Gender")
                         .HasColumnType("integer");
 
@@ -226,8 +223,6 @@ namespace KoiCare.Infrastructure.Migrations
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("KoiTypeId");
 
@@ -609,12 +604,6 @@ namespace KoiCare.Infrastructure.Migrations
 
             modelBuilder.Entity("KoiCare.Domain.Entities.KoiIndividual", b =>
                 {
-                    b.HasOne("KoiCare.Domain.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("KoiCare.Domain.Entities.KoiType", "KoiType")
                         .WithMany("KoiIndividuals")
                         .HasForeignKey("KoiTypeId")
@@ -626,8 +615,6 @@ namespace KoiCare.Infrastructure.Migrations
                         .HasForeignKey("PondId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Category");
 
                     b.Navigation("KoiType");
 
