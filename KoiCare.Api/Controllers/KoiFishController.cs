@@ -1,4 +1,5 @@
-﻿using KoiCare.Application.Features.Blog;
+﻿using KoiCare.Application.Features.Koifish;
+using KoiCare.Application.Features.Product;
 using KoiCare.Infrastructure.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,11 @@ namespace KoiCare.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BlogsController(IMediator mediator) : BaseController
+    public class KoiFishController(IMediator mediator) : BaseController
     {
-        [HttpGet("get-all")]
-        public async Task<ActionResult<GetAllBlog.Result>> GetAllBlogs([FromQuery] GetAllBlog.Query query)
+
+        [HttpGet("get-all-koi-types")]
+        public async Task<ActionResult<GetAllKoiType.Result>> GetAllKoiTypes([FromQuery] GetAllKoiType.Query query)
         {
             if (!ModelState.IsValid)
             {
@@ -21,17 +23,17 @@ namespace KoiCare.Api.Controllers
         }
 
         [Auth]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetBlogById.Result>> GetBlogById(int id)
+        [HttpGet("get-all-fish/{PondId}")]
+        public async Task<ActionResult<GetAllFishInPond.Result>> GetAllFishInPond(int PondId)
         {
-            var query = new GetBlogById.Query { Id = id };
+            var query = new GetAllFishInPond.Query { PondId = PondId };
             var result = await mediator.Send(query);
             return CommandResult(result);
         }
 
-        [Auth("Admin")]
+        [Auth("User")]
         [HttpPost("create")]
-        public async Task<ActionResult<CreateBlog.Result>> CreateBlog([FromBody] CreateBlog.Command command)
+        public async Task<ActionResult<CreateKoiFish.Result>> CreateKoiFish([FromBody] CreateKoiFish.Command command)
         {
             if (!ModelState.IsValid)
             {
@@ -41,9 +43,9 @@ namespace KoiCare.Api.Controllers
             return CommandResult(result);
         }
 
-        [Auth("Admin")]
+        [Auth("User")]
         [HttpPut("{id}")]
-        public async Task<ActionResult<UpdateBlog.Result>> UpdateBlog(int id, [FromBody] UpdateBlog.Command command)
+        public async Task<ActionResult<UpdateKoiFish.Result>> UpdateKoiFish(int id, [FromBody] UpdateKoiFish.Command command)
         {
             if (id != command.Id)
             {
@@ -59,12 +61,12 @@ namespace KoiCare.Api.Controllers
             return CommandResult(result);
         }
 
-        [Auth("Admin")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<DeleteBlog.Result>> DeleteBlog(int id)
+        [Auth("User")]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetKoiFishById.Result>> GetKoiFishById(int id)
         {
-            var command = new DeleteBlog.Command { Id = id };
-            var result = await mediator.Send(command);
+            var query = new GetKoiFishById.Query { Id = id };
+            var result = await mediator.Send(query);
             return CommandResult(result);
         }
     }
