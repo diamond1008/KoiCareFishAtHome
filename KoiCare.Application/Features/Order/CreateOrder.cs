@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -107,7 +108,7 @@ namespace KoiCare.Application.Features.Order
                         { "PhoneNumber", order.PhoneNumber },
                         { "Address", order.Address },
                         { "Total", total.ToString("C") },
-                        { "OrderDetails", GenerateOrderDetailsHtml(order.OrderDetails.ToList()) }
+                        { "OrderDetails", GenerateOrderDetailsHtml(order.OrderDetails.ToList(), products) }
                     };
                     await _emailService.SendEmailAsync(_loggedUser.Email, subject, Domain.Enums.EEmailTemplate.CustomerOrder, parameters);
 
@@ -128,13 +129,14 @@ namespace KoiCare.Application.Features.Order
             }
 
             // Helper method to format order details in HTML
-            private static string GenerateOrderDetailsHtml(List<OrderDetail> orderDetails)
+            private static string GenerateOrderDetailsHtml(List<OrderDetail> orderDetails, List<Domain.Entities.Product> products)
             {
+                CultureInfo vietnamCulture = new CultureInfo("vi-VN");
                 var sb = new StringBuilder();
                 sb.Append("<ul>");
                 foreach (var detail in orderDetails)
                 {
-                    sb.AppendFormat($"<li>Product ID: {detail.ProductId}, Quantity: {detail.Quantity}, Price: {detail.Price:C}</li>");
+                    sb.AppendFormat($"<li>Product ID: {detail.ProductId}, Product Name: {products.First(x => x.Id == detail.ProductId).Name}, Quantity: {detail.Quantity}, Price: {detail.Price.ToString("N0", vietnamCulture)} VND</li>");
                 }
                 sb.Append("</ul>");
                 return sb.ToString();
