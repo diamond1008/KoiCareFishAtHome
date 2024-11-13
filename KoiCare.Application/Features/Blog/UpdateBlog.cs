@@ -18,7 +18,7 @@ namespace KoiCare.Application.Features.Blog
             public required string Title { get; set; }
             public required string Content { get; set; }
             public string? Image { get; set; }
-            public DateTime CreatedAt { get; internal set; }
+            //public DateTime CreatedAt { get; internal set; }
         }
 
         public class Result
@@ -46,7 +46,7 @@ namespace KoiCare.Application.Features.Blog
 
                     blog.Title = request.Title;
                     blog.Content = request.Content;
-                    blog.CreatedAt = request.CreatedAt;
+                    //blog.CreatedAt = request.CreatedAt;
                     if (request.Image != null)
                     {
                         blog.Image = request.Image;
