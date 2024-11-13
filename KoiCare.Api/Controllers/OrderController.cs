@@ -11,7 +11,7 @@ namespace KoiCare.Api.Controllers
     [ApiController]
     public class OrderController(IMediator mediator) : BaseController
     {
-        [Auth("Admin")]
+        [Auth]
         [HttpGet("get-all")]
         public async Task<ActionResult<GetAllOrder.Result>> GetAllOrders([FromQuery] GetAllOrder.Query query)
         {
