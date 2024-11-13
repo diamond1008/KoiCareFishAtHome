@@ -1,54 +1,95 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
     <style>
+        /* Base styling */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
 
+        /* Container */
         .container {
             max-width: 600px;
-            margin: auto;
+            margin: 0 auto;
             background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Header section */
+        .header {
+            background-color: #ff5733;
+            color: #ffffff;
             padding: 20px;
         }
 
-        h1 {
-            color: #FFA500;
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+            }
+
+        /* Body section */
+        .content {
+            padding: 30px 20px;
+            color: #333333;
+            line-height: 1.6;
         }
 
+            .content p {
+                font-size: 18px;
+            }
+
+        /* Order details */
         .order-details {
             margin: 20px 0;
+            text-align: left;
         }
 
         .order-summary {
             background-color: #f9f9f9;
             padding: 15px;
             border-radius: 5px;
+            font-size: 16px;
+            color: #555;
         }
 
+        /* Footer */
         .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #888;
-            margin-top: 20px;
+            background-color: #f8f8f8;
+            color: #666;
+            padding: 15px 10px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Thank You for Your Order!</h1>
-        <p>Hello, {{CustomerName}}</p>
-        <p>Your order <strong>{{OrderCode}}</strong> has been successfully placed on {{OrderDate}}.</p>
-        <div class="order-details">
-            <h3>Order Details:</h3>
-            <!-- Add order items and total here dynamically -->
-            {{OrderDetails}}
+        <div class="header">
+            <h1>Thank You for Your Order!</h1>
         </div>
-        <p class="footer">If you have any questions, contact us at support@koicare.com.</p>
+        <div class="content">
+            <p>Hello, {{CustomerName}}</p>
+            <p>Your order <strong>{{OrderCode}}</strong> has been successfully placed on {{OrderDate}}.</p>
+            <div class="order-details">
+                <h3>Order Details:</h3>
+                <div class="order-summary">
+                    <!-- Dynamically insert order items and total here -->
+                    {{OrderDetails}}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; KoiKing Website. All rights reserved.</p>
+        </div>
     </div>
 </body>
 </html>
